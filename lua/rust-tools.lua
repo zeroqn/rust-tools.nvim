@@ -82,12 +82,18 @@ function M.setup(opts)
     -- setup user commands
     setupCommands()
     -- setup rust analyzer
-    setup_lsp()
+    if config.options.tools.setupLsp then
+        setup_lsp()
+    end
 
     -- enable automatic inlay hints
     if config.options.tools.autoSetHints then
         require'rust-tools.inlay_hints'.setup_autocmd()
     end
 end
+
+function M.server_config()
+    return config.options.server
+end   
 
 return M
